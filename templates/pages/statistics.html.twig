@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table>
+        <thead>
+        <tr>
+            <th>Эксперимент</th>
+            <th title="Количество девайсов участвующих в эксперименте">Кол-во девайсов</th>
+            <th>Распределение по опциям</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for experiment in experimentStatistics.experiments %}
+            <tr>
+                <td>{{ experiment.id }}. {{ experiment.identifier }}</td>
+                <td>{{ experimentStatistics.experimentDevicesCountItems[experiment.id].devicesCount }}</td>
+                <td>
+                    {% for experimentsDevicesShare in experimentStatistics.experimentsDevicesShares[experiment.id].shareValues %}
+                        <div>
+                            {{ experimentsDevicesShare.value }}: {{ experimentsDevicesShare.count }}
+                        </div>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
